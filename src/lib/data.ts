@@ -2,55 +2,79 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
+export interface Member {
+  id: string;
+  name: string;
+  position: string;
+  department: string;
+  class: string;
+  photo?: string;
+  links?: Record<string, string>;
+}
+
+export interface Team {
+  name: string;
+  members: Member[];
+}
+
+export interface ExeComFrontmatter {
+  year?: string;
+  teams?: Team[];
+  [key: string]: unknown;
+}
+
+export interface ExeComData {
+  frontmatter: ExeComFrontmatter;
+  content: string;
+}
+
 const contentDir = path.join(process.cwd(), 'content');
 
-export function getAllExecomYears() {
+export function getAllExecomYears(): string[] {
   if (!fs.existsSync(contentDir)) return [];
   const files = fs.readdirSync(contentDir);
   return files
-    .filter((file: string) => file.endsWith('.mdx') && file.startsWith('execom'))
-    .map((file: string) => file.replace('execom', '').replace('.mdx', ''));
+    .filter((file) => file.endsWith('.mdx') && file.startsWith('execom'))
+    .map((file) => file.slice(6, -4));
 }
 
-export function getExecomData(year: string) {
+export function getExecomData(year: string): ExeComData | null {
   const filePath = path.join(contentDir, `execom${year}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContent);
 
-  return { frontmatter: data, content };
+  return { frontmatter: data as ExeComFrontmatter, content };
 }
 
-export function getMemberData(year: string, memberId: string) {
+export function getMemberData(year: string, memberId: string): Member | null {
   const data = getExecomData(year);
-  if (!data || !data.frontmatter || !Array.isArray(data.frontmatter.teams)) return null;
+  const teams = data?.frontmatter.teams;
+  if (!Array.isArray(teams)) return null;
 
-  for (const team of data.frontmatter.teams) {
+  for (const team of teams) {
     if (Array.isArray(team.members)) {
-      const member = team.members.find((m: any) => m.id === memberId);
+      const member = team.members.find((m) => m.id === memberId);
       if (member) return member;
     }
   }
   return null;
 }
 
-export function getAllMemberParams() {
+export function getAllMemberParams(): { year: string; id: string }[] {
   const years = getAllExecomYears();
-  const params: { year: string; id: string }[] = [];
-  for (const year of years) {
+  return years.flatMap((year) => {
     const data = getExecomData(year);
-    if (data && data.frontmatter && Array.isArray(data.frontmatter.teams)) {
-      for (const team of data.frontmatter.teams) {
-        if (Array.isArray(team.members)) {
-          for (const member of team.members) {
-            if (member && member.id) {
-              params.push({ year, id: member.id });
-            }
-          }
-        }
-      }
-    }
-  }
-  return params;
+    const teams = data?.frontmatter.teams;
+    if (!Array.isArray(teams)) return [];
+
+    return teams.flatMap((team) =>
+      Array.isArray(team.members)
+        ? team.members
+          .filter((member): member is Member => Boolean(member && member.id))
+          .map((member) => ({ year, id: member.id }))
+        : []
+    );
+  });
 }
