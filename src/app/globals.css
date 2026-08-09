@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ieee-blue: #0066AF;
+  --color-ieee-navy: #002B49;
+  --color-ieee-black: #000000;
+  --color-ieee-white: #FFFFFF;
+  --color-ieee-overlay: rgba(0, 0, 0, 0.46);
+  --color-ieee-slate: #656565;
+  --color-ieee-silver: #E0D9D9;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #020817;
+  --ieee-blue: #0066AF;
+  --ieee-navy: #002B49;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom Gradient Helper Utilities */
+.bg-gradient-blue-navy {
+  background-image: linear-gradient(135deg, #0066AF 0%, #002B49 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.bg-gradient-black-blue {
+  background: linear-gradient(90deg, #000000 0%, #0066AF 100%);
+}
+
+.bg-gradient-card-dark {
+  background: linear-gradient(180deg, #000000 0%, #001f38 40%, #0066AF 100%);
+}
+
+.bg-gradient-hero-dark {
+  background: linear-gradient(180deg, #000000 0%, #004477 60%, #0066AF 100%);
+}
+
+.text-gradient-blue-navy {
+  background-image: linear-gradient(135deg, #0066AF 0%, #002B49 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
 }
