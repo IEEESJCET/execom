@@ -10,6 +10,13 @@ export interface Member {
   class: string;
   photo?: string;
   links?: Record<string, string>;
+  tagline?: string;
+  bio?: string;
+  status?: string;
+  skills?: string[];
+  connections?: string;
+  projectsCount?: string;
+  email?: string;
 }
 
 export interface Team {
