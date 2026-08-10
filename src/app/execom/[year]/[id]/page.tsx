@@ -202,22 +202,20 @@ export default async function MemberProfile({
     dynamicSocials.push({ key: 'email', name: 'Email', url: `mailto:${emailAddress}` });
   }
 
-  const linkedinUrl = member.links?.linkedin || '#';
-
   return (
     <main className="min-h-screen bg-[#dce8bd] flex items-center justify-center p-2 sm:p-6 font-sans">
-      <div className="w-full max-w-sm sm:max-w-md bg-[#c2d7aa] rounded-[40px] sm:rounded-[44px] shadow-2xl overflow-hidden border-[6px] sm:border-[8px] border-[#1c2e1b]/90 relative flex flex-col my-auto">
+      <div className="w-full max-w-sm sm:max-w-md bg-[#1c2e1b] rounded-[40px] sm:rounded-[44px] shadow-2xl overflow-hidden border-[6px] sm:border-[8px] border-[#1c2e1b] relative flex flex-col my-auto">
 
         {/* Dynamic Island / Notch Aesthetics */}
-        <div className="w-full flex justify-center pt-3 pb-1 relative z-20">
+        <div className="w-full bg-[#c2d7aa] flex justify-center pt-3 pb-1 relative z-20">
           <div className="w-24 h-4 bg-black rounded-full flex items-center justify-end px-2 gap-1.5">
             <div className="w-2 h-2 rounded-full bg-blue-900/60" />
             <div className="w-1.5 h-1.5 rounded-full bg-green-900/40" />
           </div>
         </div>
 
-        {/* Top Header Section (Sage Green) */}
-        <div className="px-5 sm:px-7 pt-2 pb-4 relative flex flex-col justify-between">
+        {/* Top Header Section (Sage Green with rounded bottom edge) */}
+        <div className="bg-[#c2d7aa] rounded-b-[36px] sm:rounded-b-[40px] px-5 sm:px-7 pt-2 pb-6 relative flex flex-col justify-between shadow-md z-10">
 
           {/* Top Control Bar */}
           <div className="flex items-center justify-between mb-4 z-20">
@@ -299,7 +297,7 @@ export default async function MemberProfile({
         </div>
 
         {/* Lower Main Card Section (Dark Forest Green) */}
-        <div className="bg-[#1c2e1b] text-white rounded-t-[36px] p-5 sm:p-7 space-y-4 shadow-2xl relative z-20 flex-1 flex flex-col justify-between">
+        <div className="bg-[#1c2e1b] text-white p-5 sm:p-7 space-y-4 relative flex-1 flex flex-col justify-between">
 
           {/* Bio Quote */}
           <div>
