@@ -1,41 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ieee-blue: #0066AF;
-  --color-ieee-navy: #002B49;
-  --color-ieee-black: #000000;
-  --color-ieee-white: #FFFFFF;
-  --color-ieee-overlay: rgba(0, 0, 0, 0.46);
-  --color-ieee-slate: #656565;
-  --color-ieee-silver: #E0D9D9;
+  --color-ieee-sage: #dce8bd;
+  --color-ieee-sage-header: #c2d7aa;
+  --color-ieee-forest: #1c2e1b;
+  --color-ieee-forest-dark: #142213;
+  --color-ieee-yellow: #f0fe54;
+  --color-ieee-muted: #b0c897;
 }
 
 :root {
-  --background: #f8fafc;
-  --foreground: #020817;
-  --ieee-blue: #0066AF;
-  --ieee-navy: #002B49;
+  --background: #dce8bd;
+  --foreground: #1c2e1b;
+  --ieee-sage: #dce8bd;
+  --ieee-forest: #1c2e1b;
+  --ieee-yellow: #f0fe54;
 }
 
-/* Custom Gradient Helper Utilities */
-.bg-gradient-blue-navy {
-  background-image: linear-gradient(135deg, #0066AF 0%, #002B49 100%);
+/* Custom Gradient & Accent Helper Utilities */
+.bg-gradient-forest-card {
+  background: linear-gradient(180deg, #1c2e1b 0%, #142213 100%);
 }
 
-.bg-gradient-black-blue {
-  background: linear-gradient(90deg, #000000 0%, #0066AF 100%);
+.bg-gradient-forest-hero {
+  background: linear-gradient(135deg, #1c2e1b 0%, #284427 100%);
 }
 
-.bg-gradient-card-dark {
-  background: linear-gradient(180deg, #000000 0%, #001f38 40%, #0066AF 100%);
-}
-
-.bg-gradient-hero-dark {
-  background: linear-gradient(180deg, #000000 0%, #004477 60%, #0066AF 100%);
-}
-
-.text-gradient-blue-navy {
-  background-image: linear-gradient(135deg, #0066AF 0%, #002B49 100%);
+.text-gradient-forest {
+  background-image: linear-gradient(135deg, #1c2e1b 0%, #2d4c2b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
