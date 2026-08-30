@@ -46,7 +46,8 @@ export function getAllExecomYears(): string[] {
 }
 
 export function getExecomData(year: string): ExeComData | null {
-  const filePath = path.join(contentDir, `execom${year}.mdx`);
+  const cleanYear = decodeURIComponent(year).trim();
+  const filePath = path.join(contentDir, `execom${cleanYear}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 
   const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -56,13 +57,18 @@ export function getExecomData(year: string): ExeComData | null {
 }
 
 export function getMemberData(year: string, memberId: string): Member | null {
-  const data = getExecomData(year);
-  const teams = data?.frontmatter.teams;
+  const cleanYear = decodeURIComponent(year).trim();
+  const cleanMemberId = decodeURIComponent(memberId).trim().toLowerCase();
+
+  const data = getExecomData(cleanYear);
+  const teams = data?.frontmatter?.teams;
   if (!Array.isArray(teams)) return null;
 
   for (const team of teams) {
     if (Array.isArray(team.members)) {
-      const member = team.members.find((m) => m.id === memberId);
+      const member = team.members.find(
+        (m) => m && m.id && String(m.id).trim().toLowerCase() === cleanMemberId
+      );
       if (member) return member;
     }
   }

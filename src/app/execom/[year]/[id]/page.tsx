@@ -190,9 +190,17 @@ export default async function MemberProfile({
   const dynamicSocials: Array<{ key: string; name: string; url: string }> = [];
 
   if (member.links) {
-    Object.entries(member.links).forEach(([key, url]) => {
-      if (url && typeof url === 'string' && url !== '#') {
-        dynamicSocials.push({ key, name: key, url });
+    Object.entries(member.links).forEach(([key, rawUrl]) => {
+      if (rawUrl && typeof rawUrl === 'string' && rawUrl !== '#') {
+        let formattedUrl = rawUrl.trim();
+        if (
+          !formattedUrl.startsWith('http://') &&
+          !formattedUrl.startsWith('https://') &&
+          !formattedUrl.startsWith('mailto:')
+        ) {
+          formattedUrl = `https://${formattedUrl}`;
+        }
+        dynamicSocials.push({ key, name: key, url: formattedUrl });
       }
     });
   }
