@@ -17,7 +17,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center mb-6">
           <div className="w-14 h-14 rounded-full bg-[#1c2e1b] p-3 flex items-center justify-center shadow-lg border-2 border-[#1c2e1b] mb-4 hover:scale-105 transition-transform">
             <Image
-              src="/ieee mb white png.png"
+              src="/ieee mb white png.webp"
               alt="IEEE Logo"
               width={32}
               height={32}
