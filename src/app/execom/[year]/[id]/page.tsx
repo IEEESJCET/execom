@@ -237,7 +237,7 @@ export default async function MemberProfile({
 
             <div className="w-10 h-10 rounded-full bg-[#1c2e1b] flex items-center justify-center shadow-md p-2 hover:bg-[#2b442a] transition-all">
               <Image
-                src="/ieee mb white png.png"
+                src="/ieee mb white png.webp"
                 alt="IEEE Student Branch"
                 width={24}
                 height={24}
