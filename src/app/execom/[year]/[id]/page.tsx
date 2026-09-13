@@ -368,7 +368,7 @@ export default async function MemberProfile({
               ))}
 
               <div className="bg-white/10 text-white/90 text-[11px] font-bold px-3 py-1.5 rounded-xl border border-white/15 ml-auto">
-                {member.class ? `Class: ${member.class}` : 'IEEE Member'}
+                {member.class ? (member.class === 'Faculty' ? 'Faculty' : `Class: ${member.class}`) : 'IEEE Member'}
               </div>
             </div>
           </div>
